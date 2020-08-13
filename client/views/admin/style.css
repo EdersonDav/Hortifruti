@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+input,
+button {
+  outline: none;
+}
+
+.container {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  margin: auto;
+  height: 100vh;
+  position: relative;
+}
+
+.container .title {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.voltar {
+  width: 100px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  background-color: #27c7ff;
+  color: #fff;
+  border-radius: 16px;
+  position: fixed;
+  top: 50px;
+  right: 10px;
+}
+
+.criar {
+  width: 150px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  background-color: #10c519;
+  color: #fff;
+  border-radius: 16px;
+  position: fixed;
+  top: 50px;
+  left: 10px;
+}
+
+.itens {
+  margin-top: 50px;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: -1px 2px 16px -6px rgba(0, 0, 0, 0.75);
+  border-radius: 16px;
+  height: 75px;
+}
+
+.img {
+  width: 50px;
+}
+
+.delete {
+  border: none;
+  background-color: #fff;
+}
+
+.delete img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
