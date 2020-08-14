@@ -42,12 +42,22 @@ const itensController = {
       res.send(error)
     }
   },
-  // updateItem: async (req, res)=>{
-  //   let indexNotice = this.notices.findIndex((i) => i.id == id);
-  //   this.notices[indexNotice].title = title;
-  //   this.notices[indexNotice].description = description;
-  //   model.updateNotice(req.body.id, req.body.title, req.body.description);
-  // }
+  updateItens: async (req, res) => {
+    let id = req.body._id
+    const itemUpdate = {
+      nome: req.body.nome,
+      valor: req.body.valor,
+      quantidade: req.body.quantidade,
+      imagem: req.body.imagem,
+    }
+    try {
+      console.log(id, itemUpdate);
+      let itemUp = await Itens.updateOne({ _id: id }, itemUpdate)
+      res.send(itemUp)
+    } catch (error) {
+      res.status(400).send(error)
+    }
+  }
 }
 
 export default itensController
