@@ -51,7 +51,6 @@ const itensController = {
       imagem: req.body.imagem,
     }
     try {
-      console.log(id, itemUpdate);
       let itemUp = await Itens.updateOne({ _id: id }, itemUpdate)
       let umItem = await Itens.findOne({ _id: id })
       res.send(umItem)

@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const divDeItens = document.getElementById("itens")
 const item = {}
 let editId = ""
+let edit = false
 
 let nome = document.querySelector("#nome");
 let valor = document.querySelector("#valor");
@@ -43,58 +44,65 @@ const deletarItem = (id) => {
     headers: new Headers({ "content-type": "application/json" })
   };
   fetch(`http://localhost:5000/${item}`, options).then((resp) => {
-    console.log(resp);
     loadingItens();
   });
 }
 
 const editOrCreateIten = () => {
   if (editId != "") {
-    editItem()
+    edit = true
   } else {
-    novoItem()
+    edit = false
   }
+  novoItemOrEditItem(edit)
 }
 
 
-const novoItem = () => {
-  let nome = nome.value;
-  let valor = Number(valor.value);
-  let quantidade = quantidade.value;
-  let imagem = imagem.value;
-  let item = { nome, valor, quantidade, imagem };
+const novoItemOrEditItem = async () => {
+  let itemObj = {
+    nome: nome.value,
+    valor: Number(valor.value),
+    quantidade: quantidade.value,
+    imagem: imagem.value
+  }
+
+  let methodEditOrCreate = "POST"
+  let linkFetch = "http://localhost:5000/criarItem"
+  if (edit) {
+    methodEditOrCreate = "PUT"
+    linkFetch = "http://localhost:5000/update"
+    itemObj._id = editId
+  }
+
   const options = {
-    method: "POST",
+    method: methodEditOrCreate,
     headers: new Headers({ "content-type": "application/json" }),
-    body: JSON.stringify(item),
+    body: JSON.stringify(itemObj),
   };
   if (nome != "" && valor != "" && quantidade != "") {
-    fetch("http://localhost:5000/criarItem", options).then((resp) => {
-      console.log(resp);
-    });
-    setTimeout(function () {
-      window.location.href = "../admin/admin.html";
-    }, 5000);
+    await fetch(linkFetch, options).then((resp) => {
+    }).catch(error => {
+      console.log(error);
+    })
+    resetFields()
     showPopup()
+    loadingItens()
+    editId = ""
   } else {
     alert("Verifique novamente os campos e tente outra vez");
   }
 }
 
+
 const showInfoItemEdit = async () => {
-  const itemEdit = {}
   await fetch(`http://localhost:5000/${editId}`).then(res => res.json())
     .then(data => {
-      itemEdit.nome = data.nome
-      itemEdit.valor = data.valor
-      itemEdit.quantidade = data.valor
-      itemEdit.imagem = data.imagem
+      nome.value = data.nome
+      valor.value = data.valor
+      quantidade.value = data.quantidade
+      imagem.value = data.imagem
     }
     )
-  nome.value = itemEdit.nome
-  valor.value = itemEdit.valor
-  quantidade.value = itemEdit.quantidade
-  imagem.value = itemEdit.imagem
 }
 
 const showPopup = (id = "") => {
@@ -113,4 +121,5 @@ const resetFields = () => {
   valor.value = ""
   quantidade.value = ""
   imagem.value = ""
+  editId = ""
 }
