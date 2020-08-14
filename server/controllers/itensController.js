@@ -53,7 +53,8 @@ const itensController = {
     try {
       console.log(id, itemUpdate);
       let itemUp = await Itens.updateOne({ _id: id }, itemUpdate)
-      res.send(itemUp)
+      let umItem = await Itens.findOne({ _id: id })
+      res.send(umItem)
     } catch (error) {
       res.status(400).send(error)
     }
