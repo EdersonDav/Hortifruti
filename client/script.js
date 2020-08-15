@@ -118,3 +118,47 @@ const cancelCompra = () => {
   fecharConta.style.display = "none"
   loadingItens()
 }
+
+const pagarCompra = () => {
+  itens.forEach(async item => {
+    let itemComprado = {}
+    await fetch(`http://localhost:5000/${item.id}`).then(res => res.json())
+      .then(data => {
+        itemComprado = {
+          _id: item.id,
+          nome: data.nome,
+          valor: data.valor,
+          quantidade: data.quantidade - item.quantidade,
+          imagem: data.imagem
+        }
+      })
+    const options = {
+      method: "PUT",
+      headers: new Headers({ "content-type": "application/json" }),
+      body: JSON.stringify(itemComprado),
+    };
+    await fetch("http://localhost:5000/update", options).then((resp) => {
+      console.log(itemComprado);
+    }).catch(error => {
+      console.log(error);
+    })
+  })
+
+  setTimeout(() => {
+    fecharConta.style.display = "none"
+    loadingItens()
+  }, 1000)
+}
+// const itemComprado = async (id) => {
+//   let itemComprado = []
+//   await fetch(`http://localhost:5000/${id}`).then(res => res.json())
+//     .then(data => {
+//       itemComprado.nome = data.nome
+//       itemComprado.valor = data.valor
+//       itemComprado.quantidade = data.quantidade
+//       itemComprado.imagem = data.imagem
+//     }
+//     )
+//   console.log(itemComprado);
+//   return itemComprado
+// }
