@@ -20,9 +20,9 @@ const loadingItens = async () => {
       for (let itens of data) {
         divDeItens.innerHTML += `
         <div class="list">
-          <div class="nome">Nome: ${itens.nome}</div>
+          <div class="nome"> ${itens.nome}</div>
           <div class="valor">R$: ${itens.valor}</div>
-          <div class="quantidade">Estoque: ${itens.quantidade} un</div>
+          <div class="quantidade"> ${itens.quantidade} un</div>
           <img class="img" src="${itens.imagem}" alt="${itens.nome}">
           <div>
             <button class="edit" onclick="showPopup('${itens._id}')"> <img src="../../img/edit.svg" alt="deletar"> </button>

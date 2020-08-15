@@ -2,10 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
   loadingItens();
 });
 
-const itens = []
+let itens = []
 const divDeItens = document.getElementById("itens")
+let fecharConta = document.querySelector(".fecharConta")
 
 const loadingItens = () => {
+  itens = []
   divDeItens.innerHTML = ""
   fetch('http://localhost:5000')
     .then(res => res.json())
@@ -24,7 +26,10 @@ const loadingItens = () => {
             <div class="divCompra" id="${itens._id}">
               <label class="add ">Quantidade</label>
               <input id="${itens._id}qtd" class="add inputAdd" type="number" name="qtd" id="qtd" max="${itens.quantidade}" min="1">
-              <button onclick="addItem('${itens._id}')" class="add btnAdd" >Add</button>
+              <div>
+                <button onclick="addItem('${itens._id}', this)" class="add btnAdd" >Add</button>
+                <button onclick="cancelItem('${itens._id}', this)" class="btnCancel" >Cancelar</button>
+              </div>
             </div>
           </div>
         </div>
@@ -39,20 +44,40 @@ const showDivCompra = (id) => {
   div.style.display = div.style.display == "flex" ? 'none' : 'flex'
 }
 
-const addItem = (id) => {
+const addItem = (id, e) => {
   let qtd = document.getElementById(`${id}qtd`).value
   if (qtd > 0) {
     fetch(`http://localhost:5000/${id}`).then(res => res.json())
       .then(data => {
         itens.push({
+          id: data._id,
           nome: data.nome,
           valor: data.valor,
           quantidade: document.getElementById(`${id}qtd`).value
         })
       })
   }
+  e.style.display = "none"
+  e.nextElementSibling.style.display = "flex"
+}
 
+const cancelItem = (id, e) => {
+  document.getElementById(`${id}qtd`).value = ""
+  showDivCompra(id)
   console.log(itens);
+  let newItens = []
+  itens.map(item => {
+    if (item.id != id) {
+      newItens.push(item)
+    }
+    return newItens
+  })
+
+  itens = newItens
+  console.log(itens);
+
+  e.style.display = "none"
+  e.previousElementSibling.style.display = "flex"
 }
 
 
@@ -60,35 +85,36 @@ const finalizarCompra = () => {
   if (itens.length > 0) {
     let valorFinal = 0
     let quantidadeFinal = 0
-    let fecharConta = document.querySelector(".fecharConta")
+    let itensFecharconta = document.querySelector(".tb")
+    itensFecharconta.innerHTML = `
+    <div class="th">
+          <span>Nome</span>
+          <span>Quantidade</span>
+          <span>Valor unitário</span>
+          <span>Valor Total</span>
+        </div>`
+    fecharConta.style.display = "flex"
     itens.forEach(item => {
       valorFinal += item.valor * item.quantidade
-      quantidadeFinal += item.quantidade
-      fecharConta.innerHTML += `
-    <div class="form">
-      <div>
-        <span>Nome: ${item.nome}</span>
-      </div>
-      <div>
-        <span>Quantidade: ${item.quantidade}</span>
-      </div>
-      <div>
-        <span>Valor unitário: ${item.valor}</span>
-      </div>
-      <div>
-        <span>Valor Total: ${item.valor * item.quantidade}</span>
-      </div>
-    </div>`
+      quantidadeFinal += Number(item.quantidade)
+      itensFecharconta.innerHTML += `
+          <div class="td">
+            <span>${item.nome}</span>
+            <span>${item.quantidade}</span>
+            <span>${item.valor}</span>
+            <span>${item.valor * item.quantidade}</span>
+          </div>`
 
     });
-    fecharConta.innerHTML += `
-    <div class="total">
-      <span>Quantidade de itens: ${quantidadeFinal}</span>
-      <span>Valor Final: ${valorFinal}</span>
-    </div>
-    `
+    document.getElementById("qtdFinal").innerText = quantidadeFinal
+    document.getElementById("valFinal").innerText = valorFinal
   }
   else {
     alert("Nenhum item adicionado ao carrinho")
   }
+}
+
+const cancelCompra = () => {
+  fecharConta.style.display = "none"
+  loadingItens()
 }
