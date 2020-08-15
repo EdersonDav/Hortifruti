@@ -103,6 +103,7 @@ const showInfoItemEdit = async () => {
       imagem.value = data.imagem
     }
     )
+
 }
 
 const showPopup = (id = "") => {
@@ -110,8 +111,10 @@ const showPopup = (id = "") => {
   popup.style.display = popup.style.display == "none" ? "flex" : "none"
   editId = id
   if (id != "") {
+    document.getElementById("popupTitle").innerText = "Editar Item"
     showInfoItemEdit()
   } else {
+    document.getElementById("popupTitle").innerText = "Novo Item"
     resetFields()
   }
 }

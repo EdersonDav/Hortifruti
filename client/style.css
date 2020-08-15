@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 input,
 button {
@@ -23,8 +25,7 @@ button {
 }
 
 .admin {
-  width: 100px;
-  height: 40px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,13 +34,13 @@ button {
   background-color: #27c7ff;
   color: #fff;
   border-radius: 16px;
-  position: fixed;
+  position: absolute;
   top: 50px;
   right: 10px;
 }
 .fim {
-  width: 150px;
-  height: 40px;
+  font-size: 16px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +49,7 @@ button {
   background-color: #10c519;
   color: #fff;
   border-radius: 16px;
-  position: fixed;
+  position: absolute;
   top: 50px;
   left: 10px;
   cursor: pointer;
@@ -89,7 +90,6 @@ button {
   color: #fff;
   font-size: 30px;
   font-weight: bold;
-  filter: none
 }
 
 .card img {
@@ -272,4 +272,35 @@ button {
   background-color: rgb(0, 207, 0);
   color: #fff;
   box-shadow: 4px 5px 22px -6px rgb(0, 255, 42);
+}
+
+@media(max-width: 740px){
+  .admin, .fim{
+    top: 110px;
+    font-size: 14px;
+  }
+  .cards{
+    flex-direction: column;
+    margin-top: 80px;
+  }
+  .card{
+    width: 90%;
+    font-size: 0.8rem;
+  }
+  .card img {
+    width: 70px;
+    margin-left: 0;
+  }
+  .inputAdd{
+    width: 70%;
+  }
+  .nota{
+    width: 90%;
+    font-size: .8rem;
+  }
+  .td span {
+    padding-right: 40px;
+    width: 10px;
+  }
+
 }

@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 input,
 button {
@@ -23,8 +25,7 @@ button {
 }
 
 .voltar {
-  width: 100px;
-  height: 40px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,8 +40,8 @@ button {
 }
 
 .criar {
-  width: 150px;
-  height: 40px;
+  font-size: 16px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -176,4 +177,31 @@ button {
 
 input{
   width: 150px;
+}
+
+@media(max-width: 740px){
+  .voltar, .criar{
+    margin-top: 70px;
+  }
+  .list:first-child{
+    margin-top: 50px;
+  }
+  .containerPopUp{
+    width: 90%;
+  }
+  .campos{
+    width: 100%;
+    font-size: 0.8rem;
+    justify-content: space-around;
+  }
+  input{
+    width: 40%;
+  }
+  .bts{
+    display: flex;
+    justify-content: space-around;
+  }
+  .btnCancelar{
+    margin-right: 50px;
+  }
 }
