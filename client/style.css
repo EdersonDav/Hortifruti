@@ -70,6 +70,26 @@ button {
   box-shadow: -1px 2px 16px -6px rgba(0, 0, 0, 0.75);
   border-radius: 16px;
   margin: 10px;
+  position: relative;
+}
+
+.itemZerado{
+  position: absolute;
+  top:  0;
+  right:  0;
+  bottom:  0;
+  left:  0;
+  background-color: rgba(56, 56, 56, 0.781);
+  z-index: 1;
+  border-radius: 16px;
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  filter: none
 }
 
 .card img {

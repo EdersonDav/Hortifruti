@@ -173,3 +173,7 @@ button {
   color: #fff;
   box-shadow: 4px 9px 22px -6px rgb(0, 255, 42);
 }
+
+input{
+  width: 150px;
+}

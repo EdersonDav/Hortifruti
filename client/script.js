@@ -14,7 +14,7 @@ const loadingItens = () => {
     .then(data => {
       for (let itens of data) {
         divDeItens.innerHTML += `
-        <div class="card">
+        <div id="${itens._id}card" class="card">
           <img class="card-img" src="${itens.imagem}" alt="${itens.nome}">
           <div class="info">
             <div class="nome">Nome: ${itens.nome}</div>
@@ -34,6 +34,11 @@ const loadingItens = () => {
           </div>
         </div>
       `
+        if (itens.quantidade == 0) {
+          let card = document.getElementById(itens._id + "card")
+          card.innerHTML += '<div class="itemZerado">Indisponível</div>'
+          card.style.filter = 'blur(1px)'
+        }
       }
 
     })
