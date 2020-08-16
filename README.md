@@ -12,11 +12,11 @@
 
 # 📌 Índice
 
-- [Recursos](#-features)
-- [Instalação](#-installation)
-- [Começando](#-getting-started)
-- [Tecnologias Usadas](#-technology-used)
-- [Créditos](#-credits)
+- [Recursos](#-recursos)
+- [Instalação](#-instalação)
+- [Começando](#-começando)
+- [Tecnologias Usadas](#-tecnologias-usadas)
+- [Créditos](#-créditos)
 
 # 🚀 Recursos
 
